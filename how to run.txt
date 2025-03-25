@@ -1,0 +1,17 @@
+senha é: nova_senha
+
+
+npm run dev
+docker compose -f infra/docker-compose.yaml up
+docker compose -f infra/docker-compose.yaml down
+
+
+
+Criar migracao
+npx prisma migrate dev --name add-login-history-4 // npx prisma migrate dev --name init
+
+Generate
+npx prisma generate  
+
+
+npx prisma migrate deploy

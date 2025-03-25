@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  database:
+    image: "postgres:16.0-alpine"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "novasenha"
+      POSTGRES_DB: "cafenodejs"
+    ports:
+      - "5443:5432" # Porta local para acesso ao banco
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persistência dos dados
+
+volumes:
+  postgres_data:
