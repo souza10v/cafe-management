@@ -1,19 +1,23 @@
-require('dotenv').config()
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 
-function authenticateToken(req, res, next) {
-    const authHeader = req.header('Authorization')
-    const token = authHeader && authHeader.split(' ')[1]
+const authenticateToken = (req, res, next) => {
+    const token = req.headers["authorization"];
 
-    if (token == null) 
-    return res.sendStatus(401);
+    if (!token) {
+        return res.status(401).json({ message: "Token inválido." });
+    }
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, response) => {
-        if (err) 
-        return res.sendStatus(403)
-        req.locals = response
-        next()
-    })
-}
+    jwt.verify(token.split(" ")[1], process.env.JWT_SECRET, (err, user) => {
+        if (err) {
+            if (err.name === "TokenExpiredError") {
+                return res.status(401).json({ message: "Token expirado. Faça login novamente." });
+            } else {
+                return res.status(403).json({ message: "Token inválido." });
+            }
+        }
+        req.user = user;
+        next();
+    });
+};
 
-module.exports = {authenticateToken: authenticateToken};
+module.exports = { authenticateToken };
