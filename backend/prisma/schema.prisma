@@ -48,3 +48,18 @@ model Product {
   updatedAt   DateTime @updatedAt
   isdeleted   Boolean  @default(false)
 }
+
+model Bill {
+  id             Int     @id @default(autoincrement())
+  uuid           String  @unique
+  name           String
+  email          String
+  contactNumber  String  
+  paymentMethod  String 
+  total          Int
+  productDetails Json?
+  createdBy      String
+  isDeleted      Boolean @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
