@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { SignupComponent } from '../signup/signup.component';
 
 @Component({
   selector: 'app-home',
@@ -9,4 +11,20 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 })
 export class HomeComponent {
 
+  constructor(
+    private dialog: MatDialog,
+  ) { }
+
+  ngOnInit() {
+  }
+
+  signupAction() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '550px';
+    this.dialog.open(SignupComponent, dialogConfig);
+  }
+
+  loginAction() {
+    console.log('teste');
+  }
 }

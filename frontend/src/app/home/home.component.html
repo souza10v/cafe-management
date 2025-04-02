@@ -8,8 +8,13 @@
       <p>Saboreie pratos incríveis preparados com ingredientes frescos e de alta qualidade.</p>
       <p>Venha viver uma experiência gastronômica única!</p>
   
-      <button mat-raised-button color="accent" routerLink="/login">
-        Entrar 🍷
+      <button (click)="loginAction()" mat-raised-button color="accent">
+        Entrar 
+      </button>
+
+      <br>
+      <button (click)="signupAction()" mat-raised-button color="accent">
+        Sign up 
       </button>
     </div>
   </div>
