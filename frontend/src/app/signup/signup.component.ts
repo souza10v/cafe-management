@@ -38,5 +38,12 @@ export class SignupComponent {
 
   handleSubmit(){
     this.ngxService.start();
+    var formData = this.signupForm.value;
+    var data = {
+      name: formData.name,
+      email: formData.email,
+      contactNumber: formData.contactNumber,
+      password: formData.password
+    }
   }
 }
