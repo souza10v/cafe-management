@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 import { SignupComponent } from '../signup/signup.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [MatToolbarModule],
+  imports: [CommonModule, MatToolbarModule, MatDialogModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

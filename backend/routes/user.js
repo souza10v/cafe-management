@@ -41,7 +41,7 @@ router.post('/signup', async (req, res) => {
             },
         });
 
-        res.status(201).json(user);
+        res.status(201).json({ message: "Usuário cadastrado com sucesso" });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Erro ao criar o usuário' });

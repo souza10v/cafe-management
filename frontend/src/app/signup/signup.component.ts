@@ -4,12 +4,26 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { SnackbarService } from '../services/snackbar.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { GlobalConstants } from '../shared/global-constants';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-signup',
-  imports: [],
+  imports: [
+    MatToolbarModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    CommonModule
+  ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
@@ -25,7 +39,7 @@ export class SignupComponent {
     private snackbarService: SnackbarService,
     private dialogRef: MatDialogRef<SignupComponent>,
     private ngxService: NgxUiLoaderService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
@@ -36,14 +50,33 @@ export class SignupComponent {
     })
   }
 
-  handleSubmit(){
+  handleSubmit() {
+    console.log("aa")
     this.ngxService.start();
     var formData = this.signupForm.value;
     var data = {
       name: formData.name,
       email: formData.email,
-      contactNumber: formData.contactNumber,
-      password: formData.password
+      phone: formData.contactNumber,
+      password: formData.password,
+      status: true,
+      role: "user"
     }
+    this.userService.signup(data).subscribe((response: any) => {
+      this.ngxService.stop();
+      this.dialogRef.close();
+      this.responseMessage = response?.message;
+      this.snackbarService.openSnackBar(this.responseMessage, "");
+      this.router.navigate(['/']);
+    }, (error) => {
+      this.ngxService.stop();
+      if (error.error?.error) {
+        this.responseMessage = error.error.error;
+      } else {
+        this.responseMessage = GlobalConstants.genericError;
+      }
+
+      this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
+    })
   }
 }
