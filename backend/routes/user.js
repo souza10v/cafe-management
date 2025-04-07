@@ -189,18 +189,19 @@ router.patch('/update', auth.authenticateToken, checkRole.checkRole, async (req,
 })
 
 router.get('/checkToken', auth.authenticateToken, async (req, res) => {
-    const token = req.header.authorization;
+    return res.status(200).json({ message: "true" });
+    // const token = req.header.authorization;
 
-    if (!token) {
-        return res.status(401).json({ message: "Token não informado." });
-    }
+    // if (!token) {
+    //     return res.status(401).json({ message: "Token não informado." });
+    // }
 
-    try {
-        jwt.verify(token, process.env.JWT_SECRET);
-        return res.status(200).json({ message: "Token válido." });
-    } catch (error) {
-        return res.status(401).json({ message: "Token inválido." });
-    }
+    // try {
+    //     jwt.verify(token, process.env.JWT_SECRET);
+    //     return res.status(200).json({ message: "Token válido." });
+    // } catch (error) {
+    //     return res.status(401).json({ message: "Token inválido." });
+    // }
 });
 
 router.post('/changePassword', auth.authenticateToken, async (req, res) => {
