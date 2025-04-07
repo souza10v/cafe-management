@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/d
 import { SignupComponent } from '../signup/signup.component';
 import { CommonModule } from '@angular/common';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-home',
@@ -27,11 +28,12 @@ export class HomeComponent {
   }
 
   loginAction() {
-    console.log('loginAction');
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '550px';
+    this.dialog.open(LoginComponent, dialogConfig);
   }
 
   forgotPasswordAction(){
-    console.log('forgotPasswordAction')
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '550px';
     this.dialog.open(ForgotPasswordComponent, dialogConfig);

@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../services/user.service';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { SnackbarService } from '../services/snackbar.service';
+import { SnackbarService } from '../../services/snackbar.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { GlobalConstants } from '../shared/global-constants';
+import { GlobalConstants } from '../../shared/global-constants';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ForgotPasswordResponse } from '../../../models/user.model';
 
 
 @Component({
@@ -47,24 +48,29 @@ export class ForgotPasswordComponent {
 
   handleSubmit() {
     this.ngxService.start();
-    var formData = this.forgotPasswordForm.value;
-    var data = {
+    const formData = this.forgotPasswordForm.value;
+  
+    const data = {
       email: formData.email,
-    }
-    this.userService.forgotPassword(data).subscribe((response: any) => {
-      this.ngxService.stop();
-      this.responseMessage = response?.message;
-      this.dialogRef.close();
-      this.snackbarService.openSnackBar(this.responseMessage, 'success');
-    }, (error) => {
-      this.ngxService.stop();
-      this.snackbarService.openSnackBar(this.responseMessage, 'error');
-      if(error.error?.message){
-        this.responseMessage = error?.message;
-      } else {
-        this.responseMessage = GlobalConstants.genericError;
+    };
+  
+    this.userService.forgotPassword(data).subscribe({
+      next: (response: ForgotPasswordResponse) => {
+        this.ngxService.stop();
+        this.responseMessage = response.message;
+        this.dialogRef.close();
+        this.snackbarService.openSnackBar(this.responseMessage, 'success');
+      },
+      error: (error) => {
+        this.ngxService.stop();
+        if (error.error?.message) {
+          this.responseMessage = error.error.message;
+        } else {
+          this.responseMessage = GlobalConstants.genericError;
+        }
+        this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
       }
-      this.snackbarService.openSnackBar(this.responseMessage, 'error');
-    })
+    });
   }
+  
 }

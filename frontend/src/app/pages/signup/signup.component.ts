@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
-import { SnackbarService } from '../services/snackbar.service';
+import { UserService } from '../../services/user.service';
+import { SnackbarService } from '../../services/snackbar.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { GlobalConstants } from '../shared/global-constants';
+import { GlobalConstants } from '../../shared/global-constants';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SignupResponse } from '../../../models/user.model';
 
 
 @Component({
@@ -51,32 +52,39 @@ export class SignupComponent {
   }
 
   handleSubmit() {
-    console.log("aa")
+    console.log("Enviando formulário de cadastro...");
     this.ngxService.start();
-    var formData = this.signupForm.value;
-    var data = {
+  
+    const formData = this.signupForm.value;
+    const data = {
       name: formData.name,
       email: formData.email,
       phone: formData.contactNumber,
       password: formData.password,
       status: true,
       role: "user"
-    }
-    this.userService.signup(data).subscribe((response: any) => {
-      this.ngxService.stop();
-      this.dialogRef.close();
-      this.responseMessage = response?.message;
-      this.snackbarService.openSnackBar(this.responseMessage, "");
-      this.router.navigate(['/']);
-    }, (error) => {
-      this.ngxService.stop();
-      if (error.error?.error) {
-        this.responseMessage = error.error.error;
-      } else {
-        this.responseMessage = GlobalConstants.genericError;
+    };
+  
+    this.userService.signup(data).subscribe({
+      next: (response: SignupResponse) => {
+        this.ngxService.stop();
+        this.dialogRef.close();
+        this.responseMessage = response?.message || 'Cadastro realizado com sucesso!';
+        this.snackbarService.openSnackBar(this.responseMessage, "success");
+        this.router.navigate(['/']);
+      },
+      error: (error) => {
+        this.ngxService.stop();
+        if (error.error?.message) {
+          this.responseMessage = error.error.message;
+        } else if (error.error?.error) {
+          this.responseMessage = error.error.error;
+        } else {
+          this.responseMessage = GlobalConstants.genericError;
+        }
+        this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
       }
-
-      this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
-    })
+    });
   }
+  
 }

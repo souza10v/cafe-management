@@ -112,7 +112,7 @@ router.post('/forgotPassword', async (req, res) => {
         });
 
         if (!existingUser) {
-            return res.status(200).json({ message: 'Senha enviada com sucesso para o seu email' });
+            return res.status(200).json({ message: 'Erro ao recuperar senha' });
         }
 
         var mailOptions = {
