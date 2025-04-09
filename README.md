@@ -1,26 +1,27 @@
-☕ Cafe Management System
-🚧 Project Status: In Development
+# ☕ Cafe Management System
 
-A full-stack web application to manage café operations built using Angular (frontend), Node.js (backend), and PostGresql (database). This project includes user authentication, product and order management, billing, and dashboard insights.
+🚧 **Project Status:** In Development
 
-🔧 Tech Stack
-Frontend: Angular
+A full-stack web application to manage café operations, built using **Angular** (frontend), **Node.js** (backend), and **PostgreSQL** (database).  
+This project includes user authentication, product and order management, billing, and dashboard insights.
 
-Backend: Node.js, Express
+---
 
-Database: PostGresql
+## 🔧 Tech Stack
 
+- **Frontend:** Angular  
+- **Backend:** Node.js, Express  
+- **Database:** PostgreSQL  
 
-📂 Features (Planned)
+---
 
-✅ User Signup & Login
+## 📂 Planned Features
 
-✅  Forgot Password & Change Password
+- ✅ **User Signup & Login**  
+- ✅ **Forgot Password & Change Password**  
+- 📦 **Manage Categories & Products**  
+- 🧾 **Generate & View Bills**  
+- ✅ **Dashboard Overview**  
+- 👥 **User Management**
 
-📦 Manage Categories & Products
-
-🧾 Generate & View Bills
-
-✅  Dashboard Overview
-
-👥 User Management
+---
