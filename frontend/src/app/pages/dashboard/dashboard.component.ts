@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { SnackbarService } from '../../services/snackbar.service';
 import { GlobalConstants } from '../../shared/global-constants';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -21,7 +22,8 @@ import { GlobalConstants } from '../../shared/global-constants';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    RouterModule
   ]
 })
 export class DashboardComponent {

@@ -1,7 +1,7 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
-    @for (card of cards | async; track card) {
+  <!-- <mat-grid-list cols="2" rowHeight="350px"> 
+  @for (card of cards | async; track card) {
       <mat-grid-tile [colspan]="card.cols" [rowspan]="card.rows">
         <mat-card class="dashboard-card">
           <mat-card-header>
@@ -23,4 +23,49 @@
       </mat-grid-tile>
     }
   </mat-grid-list>
+  
+  <mat-card>
+    <b>
+      <span>Dashboard</span>
+    </b>
+  </mat-card>
+  <br> -->
+
+
+
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <div class="container">
+          <h2 class="title">Total Category:</h2>
+          <h1 class="title">{{data?.data?.category}}</h1>
+          <p>
+            <button class="button" [routerLink]="['/cafe/category']">View Category</button>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <div class="container">
+          <h2 class="title">Total Product:</h2>
+          <h1 class="title">{{data?.data?.product}}</h1>
+          <p>
+            <button class="button" [routerLink]="['/cafe/product']">View Product</button>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <div class="container">
+          <h2 class="title">Total Bill:</h2>
+          <h1 class="title">{{data?.data?.bill}}</h1>
+          <p>
+            <button class="button" [routerLink]="['/cafe/bill']">View Bill</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
