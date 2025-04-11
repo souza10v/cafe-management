@@ -24,6 +24,10 @@ export interface ForgotPasswordResponse {
     message: string;
 }
 
+export interface ChangePasswordResponse {
+    message: string;
+}
+
 export interface SignupRequest {
     name: string;
     email: string;

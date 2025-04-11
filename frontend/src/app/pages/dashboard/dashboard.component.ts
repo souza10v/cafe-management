@@ -39,8 +39,7 @@ export class DashboardComponent {
     private dashboardService: DashoboardService,
     private ngxService: NgxUiLoaderService,
     private snackbarService: SnackbarService
-  ) {
-  }
+  ) {}
 
   ngOnInit() { 
     console.log('Token no localStorage:', localStorage.getItem('token'));

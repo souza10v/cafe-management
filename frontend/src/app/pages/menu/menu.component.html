@@ -4,10 +4,19 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+    <mat-nav-list appAccordion>
+      <mat-list-item appAccordionLink *ngFor="let menuItem of menuItems.getMenuItems()" routerLinkActive="selected">
+        <a
+          appAccordionToggle
+          [routerLink]="['/', menuItem.state]"
+          *ngIf="menuItem.role === '' || menuItem.role === tokenPayload.role"
+        >
+        <mat-icon>{{ menuItem.icon }}</mat-icon>
+          <span>{{ menuItem.name }}</span>
+          <span fxFlex></span>
+    
+      </a>
+      </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -26,3 +35,5 @@
     <app-dashboard></app-dashboard>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+
