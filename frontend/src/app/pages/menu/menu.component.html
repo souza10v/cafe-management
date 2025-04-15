@@ -4,9 +4,12 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
+
+    <!-- Items menu -->
     <mat-nav-list appAccordion>
       <mat-list-item appAccordionLink *ngFor="let menuItem of menuItems.getMenuItems()" routerLinkActive="selected">
         <a
+          class="menu-link"
           appAccordionToggle
           [routerLink]="['/', menuItem.state]"
           *ngIf="menuItem.role === '' || menuItem.role === tokenPayload.role"
@@ -18,6 +21,8 @@
       </a>
       </mat-list-item>
     </mat-nav-list>
+
+
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -30,7 +35,7 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
       }
-      <span>frontend</span>
+      <app-header class="align-right"></app-header>
     </mat-toolbar>
     <app-dashboard></app-dashboard>
   </mat-sidenav-content>

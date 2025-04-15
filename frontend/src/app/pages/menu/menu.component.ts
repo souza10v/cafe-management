@@ -15,6 +15,7 @@ import { DashoboardService } from '../../services/dashoboard.service';
 import { SnackbarService } from '../../services/snackbar.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { RouterModule } from '@angular/router';
+import { HeaderComponent } from "../../components/header/header.component";
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -29,8 +30,9 @@ import { RouterModule } from '@angular/router';
     AsyncPipe,
     DashboardComponent,
     RouterModule,
-    CommonModule
-  ]
+    CommonModule,
+    HeaderComponent
+]
 })
 export class MenuComponent {
   private breakpointObserver = inject(BreakpointObserver);
