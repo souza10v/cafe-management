@@ -205,11 +205,15 @@ router.get('/checkToken', auth.authenticateToken, async (req, res) => {
 });
 
 router.post('/changePassword', auth.authenticateToken, async (req, res) => {
-    const { oldPassword, newPassword } = req.body;
-    const email = req.locals.email;
+    const { oldPassword, newPassword, confirmPassword } = req.body;
+    const email = req.user.email;
 
-    if ( !newPassword || !oldPassword) {
+    if ( !newPassword || !oldPassword || !confirmPassword) {
         return res.status(400).json({ error: 'Usuário e senha são obrigatórios' });
+    }
+
+    if(newPassword !== confirmPassword) {
+        return res.status(400).json({ error: 'As senhas não coincidem' });
     }
 
     if (!email) {

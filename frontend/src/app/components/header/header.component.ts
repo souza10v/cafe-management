@@ -10,6 +10,7 @@ import { MatMenuTrigger, MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ConfirmationComponent } from '../../material-component/dialog/confirmation/confirmation.component';
+import { ChangePasswordComponent } from '../../material-component/dialog/change-password/change-password.component';
 
 
 @Component({
@@ -30,7 +31,7 @@ import { ConfirmationComponent } from '../../material-component/dialog/confirmat
 })
 export class HeaderComponent {
   role: any;
-  constructor(private router: Router, private dialog: MatDialog) {}
+  constructor(private router: Router, private dialog: MatDialog) { }
 
   logout() {
     const dialogConfig = new MatDialogConfig();
@@ -40,6 +41,7 @@ export class HeaderComponent {
     const dialogRef = this.dialog.open(ConfirmationComponent, dialogConfig);
     const sub = dialogRef.componentInstance.onEmitStatusChange.subscribe(
       (user: any) => {
+        console.log("user", user)
         dialogRef.close();
         localStorage.clear();
         this.router.navigate(['/']);
@@ -50,6 +52,6 @@ export class HeaderComponent {
   changePassword() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '550px';
-    //const dialogRef = this.dialog.open(ChangePasswordComponent, dialogConfig);
+    const dialogRef = this.dialog.open(ChangePasswordComponent, dialogConfig);
   }
 }
