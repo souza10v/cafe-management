@@ -1,24 +1,20 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
 
     <!-- Items menu -->
     <mat-nav-list appAccordion>
       <mat-list-item appAccordionLink *ngFor="let menuItem of menuItems.getMenuItems()" routerLinkActive="selected">
-        <a
-          class="menu-link"
-          appAccordionToggle
-          [routerLink]="['/', menuItem.state]"
-          *ngIf="menuItem.role === '' || menuItem.role === tokenPayload.role"
-        >
-        <mat-icon>{{ menuItem.icon }}</mat-icon>
-          <span>{{ menuItem.name }}</span>
-          <span fxFlex></span>
-    
-      </a>
+        <a class="menu-link" appAccordionToggle
+        [routerLink]="getRouterLink(menuItem.state)"
+        *ngIf="menuItem.role === '' || menuItem.role === tokenPayload.role">
+       <mat-icon>{{ menuItem.icon }}</mat-icon>
+       <span>{{ menuItem.name }}</span>
+       <span fxFlex></span>
+     </a>
+     
+     
       </mat-list-item>
     </mat-nav-list>
 
@@ -27,18 +23,12 @@
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       @if (isHandset$ | async) {
-        <button
-          type="button"
-          aria-label="Toggle sidenav"
-          mat-icon-button
-          (click)="drawer.toggle()">
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-        </button>
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
       }
       <app-header class="align-right"></app-header>
     </mat-toolbar>
-    <app-dashboard></app-dashboard>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-

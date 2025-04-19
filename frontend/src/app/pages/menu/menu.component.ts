@@ -54,4 +54,9 @@ export class MenuComponent {
       map(result => result.matches),
       shareReplay()
     );
+
+    getRouterLink(path: string): any[] {
+      return ['/', ...path.split('/')];
+    }
+    
 }
