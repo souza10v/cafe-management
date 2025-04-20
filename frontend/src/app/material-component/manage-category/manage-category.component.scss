@@ -3,10 +3,21 @@
 }
 
 mat-card{
-    padding: 20px;
+    padding: 15px 15px 0 15px;
 }
 
 table{
-    margin-top: 5px;
+    margin-top: 15px;
     width: 100%;
+}
+
+.center-table th,
+.center-table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.div-button{
+   width: 15%;
+   margin: 15px 0 15px 0;
 }

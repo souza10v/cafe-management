@@ -1,31 +1,39 @@
-<mat-card>
-    <b><span>Manage Category</span></b>
-    <button mat-field-button color="primary" class="floar-right" (click)="handleAddAction()">Add Category</button>
-</mat-card>
-<hr>
-<mat-card>
-    <mat-form-field appearance="fill">
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" #input/>
-    </mat-form-field>
-</mat-card>
-<hr>
-<div class="resposive_table">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="name">
-            <th mat-here-cell *matHeaderCellDef> Name</th>
-            <td mat-cell *matCellDef="let element">{{element.name}}</td>
-        </ng-container>
+<div class="grid-container">
+    <h1 class="mat-h1">Manage Category</h1>
+    <hr>
+    <div class="div-button">
+        <button class="button" mat-field-button color="primary" (click)="handleAddAction()">Add Category</button>
+    </div>
+    
+    <!-- <mat-card>
+        <button mat-field-button color="primary" class="floar-right" (click)="handleAddAction()">Add Category</button>
+    </mat-card> -->
 
-        <ng-container matColumnDef="edit">
-            <th mat-here-cell *matHeaderCellDef> Action</th>
-            <td mat-cell *matCellDef="let element" class="action-link">
-            <button mat-icon-button color="primary" matToolTip="Edit" (click)="handleEditAction(element)">
-                <mat-icon>edit</mat-icon>
-            </button></td>
-        </ng-container>
+    <mat-card>
+        <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" #input />
+        </mat-form-field>
+    </mat-card>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; stick:true"></tr>
-        <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
-    </table>
+    <div class="resposive_table">
+        <table mat-table [dataSource]="dataSource" class="center-table mat-elevation-z8">
+            <ng-container matColumnDef="name">
+                <th mat-here-cell *matHeaderCellDef> Name</th>
+                <td mat-cell *matCellDef="let element">{{element.name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+                <th mat-here-cell *matHeaderCellDef> Action</th>
+                <td mat-cell *matCellDef="let element" class="action-link">
+                    <button mat-icon-button color="primary" matToolTip="Edit" (click)="handleEditAction(element)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <hr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; stick:true"></tr>
+            <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+        </table>
+    </div>
 </div>

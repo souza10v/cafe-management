@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { CategoryComponent } from '../dialog/category/category.component';
 
 @Component({
   selector: 'app-manage-category',
@@ -67,7 +68,19 @@ export class ManageCategoryComponent {
   }
 
   handleAddAction() {
-
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      action: 'Add'
+    };
+    dialogConfig.width = "850px";
+    const dialogRef = this.dialog.open(CategoryComponent, dialogConfig);
+    this.router.events.subscribe(() => {
+      dialogRef.close()
+    });
+    const sub = dialogRef.componentInstance.onAddCategory.subscribe((response: any) => {
+      this.tableData();
+    });
+    
   }
 
   handleEditAction(value: any) {
