@@ -12,16 +12,16 @@ export const routes: Routes = [
     },
     {
         path: 'dashboard',
-        component: MenuComponent, // MenuComponent será a tela principal para o dashboard
+        component: MenuComponent, 
         canActivate: [RouteGuardService],
         data: { expectedRole: ['admin', 'user'] },
-        children: [ // Aqui você configura as sub-rotas dentro do MenuComponent
+        children: [ 
             {
                 path: '',
-                component: DashboardComponent // Aqui o DashboardComponent será carregado dentro do MenuComponent
+                component: DashboardComponent 
             },
             {
-                path: 'category', // Exemplo de outra sub-rota
+                path: 'category', 
                 component: ManageCategoryComponent,
                 canActivate: [RouteGuardService],
                 data: { expectedRole: ['admin'] }

@@ -6,20 +6,17 @@
     <!-- Items menu -->
     <mat-nav-list appAccordion>
       <mat-list-item appAccordionLink *ngFor="let menuItem of menuItems.getMenuItems()" routerLinkActive="selected">
-        <a class="menu-link" appAccordionToggle
-        [routerLink]="getRouterLink(menuItem.state)"
-        *ngIf="menuItem.role === '' || menuItem.role === tokenPayload.role">
-       <mat-icon>{{ menuItem.icon }}</mat-icon>
-       <span>{{ menuItem.name }}</span>
-       <span fxFlex></span>
-     </a>
-     
-     
+        <a class="menu-link" appAccordionToggle [routerLink]="getRouterLink(menuItem.state)" 
+          *ngIf="menuItem.role === '' || menuItem.role === tokenPayload.role"> <!-- Logic to show menu items --> 
+          <mat-icon>{{ menuItem.icon }}</mat-icon>
+          <span>{{ menuItem.name }}</span>
+          <span fxFlex></span>
+        </a>
       </mat-list-item>
     </mat-nav-list>
-
-
   </mat-sidenav>
+
+
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       @if (isHandset$ | async) {
