@@ -1,37 +1,31 @@
 import { Component } from '@angular/core';
-import { CategoryService } from '../../services/category.service';
-import { SnackbarService } from '../../services/snackbar.service';
-import { Router } from '@angular/router';
+import { ProductService } from '../../services/product.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
+import { SnackbarService } from '../../services/snackbar.service';
+import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { GlobalConstants } from '../../shared/global-constants';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
-import { CategoryComponent } from '../dialog/category/category.component';
 
 @Component({
-  selector: 'app-manage-category',
-  imports: [
-    MatCardModule,
-    MatFormFieldModule,
-    MatTableModule,
-    MatIconModule,
-    MatInputModule
-  ],
-  templateUrl: './manage-category.component.html',
-  styleUrl: './manage-category.component.scss'
+  selector: 'app-manage-product',
+  imports: [MatCardModule, MatFormFieldModule, MatIconModule, CommonModule, MatTableModule, MatInputModule],
+  templateUrl: './manage-product.component.html',
+  styleUrl: './manage-product.component.scss'
 })
-export class ManageCategoryComponent {
-  displayedColumns: string[] = ['name', 'edit'];
+export class ManageProductComponent {
+  displayedColumns: string[] = ['name', 'categoryName', 'description', 'price', 'edit'];
   dataSource: any;
   responseMessage: any;
 
   constructor(
-    private categoryService: CategoryService,
+    private productService: ProductService,
     private ngxService: NgxUiLoaderService,
     private dialog: MatDialog,
     private snackbarService: SnackbarService,
@@ -42,13 +36,12 @@ export class ManageCategoryComponent {
     this.ngxService.start();
     this.tableData();
   }
-  
+
   tableData() {
-    this.categoryService.getCategorys().subscribe({
+    this.productService.getProducts().subscribe({
       next: (response: any) => {
         this.ngxService.stop();
         this.dataSource = new MatTableDataSource(response);
-
       },
       error: (error: any) => {
         this.ngxService.stop();
@@ -59,7 +52,7 @@ export class ManageCategoryComponent {
         }
         this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
       }
-    })
+    });
   }
 
   applyFilter(event: Event) {
@@ -68,22 +61,8 @@ export class ManageCategoryComponent {
   }
 
   handleAddAction() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      action: 'Add'
-    };
-    dialogConfig.width = "850px";
-    const dialogRef = this.dialog.open(CategoryComponent, dialogConfig);
-    this.router.events.subscribe(() => {
-      dialogRef.close()
-    });
-    const sub = dialogRef.componentInstance.onAddCategory.subscribe((response: any) => {
-      this.tableData();
-    });
-    
-  }
-
-  handleEditAction(value: any) {
 
   }
+
+  handleEditAction(value: any) { }
 }

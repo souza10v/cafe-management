@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { RouteGuardService } from './services/route-guard.service';
 import { ManageCategoryComponent } from './material-component/manage-category/manage-category.component';
+import { ManageProductComponent } from './material-component/manage-product/manage-product.component';
 
 export const routes: Routes = [
     {
@@ -23,6 +24,12 @@ export const routes: Routes = [
             {
                 path: 'category', 
                 component: ManageCategoryComponent,
+                canActivate: [RouteGuardService],
+                data: { expectedRole: ['admin'] }
+            },
+            {
+                path: 'product', 
+                component: ManageProductComponent,
                 canActivate: [RouteGuardService],
                 data: { expectedRole: ['admin'] }
             }
