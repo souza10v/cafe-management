@@ -42,13 +42,12 @@ export class ManageCategoryComponent {
     this.ngxService.start();
     this.tableData();
   }
-  
+
   tableData() {
-    this.categoryService.getCategorys().subscribe({
+    this.categoryService.getCategories().subscribe({
       next: (response: any) => {
         this.ngxService.stop();
         this.dataSource = new MatTableDataSource(response);
-
       },
       error: (error: any) => {
         this.ngxService.stop();

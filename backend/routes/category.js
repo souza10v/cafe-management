@@ -48,6 +48,10 @@ router.get('/get', auth.authenticateToken, async (req, res, next) => {
             where: {
                 ...query,
             },
+            select: {
+                id: true,
+                name: true
+            }
         });
 
         if (categories.length === 0) {

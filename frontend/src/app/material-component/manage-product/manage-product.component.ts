@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
+import { ProductComponent } from '../dialog/product/product.component';
 
 @Component({
   selector: 'app-manage-product',
@@ -41,7 +42,7 @@ export class ManageProductComponent {
     this.productService.getProducts().subscribe({
       next: (response: any) => {
         this.ngxService.stop();
-        this.dataSource = new MatTableDataSource(response);
+        this.dataSource = new MatTableDataSource(response.data);
       },
       error: (error: any) => {
         this.ngxService.stop();
@@ -61,8 +62,33 @@ export class ManageProductComponent {
   }
 
   handleAddAction() {
-
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      action: 'Add'
+    };
+    dialogConfig.width = "850px";
+    const dialogRef = this.dialog.open(ProductComponent, dialogConfig);
+    this.router.events.subscribe((event) => {
+      dialogRef.close();
+    });
+    const sub = dialogRef.componentInstance.onAddProduct.subscribe((response: any) => {
+      this.tableData();
+    })
   }
 
-  handleEditAction(value: any) { }
+  handleEditAction(values: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      action: 'Edit',
+      data: values
+    };
+    dialogConfig.width = "850px";
+    const dialogRef = this.dialog.open(ProductComponent, dialogConfig);
+    this.router.events.subscribe((event) => {
+      dialogRef.close();
+    });
+    const sub = dialogRef.componentInstance.onEditProduct.subscribe((response: any) => {
+      this.tableData();
+    })
+   }
 }

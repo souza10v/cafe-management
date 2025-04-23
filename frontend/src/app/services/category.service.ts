@@ -24,7 +24,7 @@ export class CategoryService {
     })
   }
 
-  getCategorys() {
+  getCategories() {
     return this.httpClient.get(this.url + '/category/get')
   }
 }

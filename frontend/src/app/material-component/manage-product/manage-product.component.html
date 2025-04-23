@@ -3,7 +3,7 @@
     <hr />
     <div class="div-button">
     <button mat-flat-button color="primary" class="button" (click)="handleAddAction()">
-        Add Category
+        Add Product
     </button>
     </div>
 
@@ -23,7 +23,7 @@
 
             <ng-container matColumnDef="categoryName">
                 <th mat-header-cell *matHeaderCellDef>Categoria</th>
-                <td mat-cell *matCellDef="let element">{{ element.categoryName }}</td>
+                <td mat-cell *matCellDef="let element">{{ element.category.name }}</td>
             </ng-container>
 
             <ng-container matColumnDef="description">
