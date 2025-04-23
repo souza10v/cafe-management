@@ -33,14 +33,14 @@ export class ProductService {
   }
 
   updateStatus(data: any) {
-    return this.httpClient.post(this.url + '/product/updateStatus', data, {
+    return this.httpClient.patch(this.url + '/product/updateStatus', data, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     }
     )
   }
 
   delete(id: any) {
-    return this.httpClient.post(this.url + '/product/delete' + id, {
+    return this.httpClient.delete(this.url + '/product/delete/' + id, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     }
     )
