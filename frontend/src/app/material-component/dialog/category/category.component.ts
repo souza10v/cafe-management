@@ -45,13 +45,13 @@ export class CategoryComponent {
 
   handleSubmit() {
     if (this.dialogAction === "Edit") {
-      this.edit();
+      this.editCategory();
     } else {
-      this.add();
+      this.addCategory();
     }
   }
 
-  add() {
+  addCategory() {
     var formData = this.categoryForm.value;
     var data = {
       category: formData.name
@@ -75,7 +75,7 @@ export class CategoryComponent {
     });
   }
 
-  edit() {
+  editCategory() {
     var formData = this.categoryForm.value;
     var data = {
       id: this.dialogData.data.id,

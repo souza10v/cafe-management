@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+import { UserModels } from '../../../../models/user.model';
 @Component({
   selector: 'app-change-password',
   imports: [    
@@ -63,7 +64,7 @@ export class ChangePasswordComponent {
     }
 
     this.userService.changePassword(data).subscribe({
-      next: (response: any) => {
+      next: (response: UserModels.ChangePasswordResponse) => {
         this.ngxService.stop();
         this.responseMessage = response.message;
         this.dialogRef.close();

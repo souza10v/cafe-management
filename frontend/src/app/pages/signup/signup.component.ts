@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { SignupResponse } from '../../../models/user.model';
+import { UserModels } from '../../../models/user.model';
 
 
 @Component({
@@ -66,7 +66,7 @@ export class SignupComponent {
     };
   
     this.userService.signup(data).subscribe({
-      next: (response: SignupResponse) => {
+      next: (response: UserModels.SignupResponse) => {
         this.ngxService.stop();
         this.dialogRef.close();
         this.responseMessage = response?.message || 'Cadastro realizado com sucesso!';

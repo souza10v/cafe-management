@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { LoginResponse } from '../../../models/user.model';
+import { UserModels } from '../../../models/user.model';
 
 
 @Component({
@@ -59,7 +59,7 @@ export class LoginComponent {
     };
   
     this.userService.login(data).subscribe({
-      next: (response: LoginResponse) => {
+      next: (response: UserModels.LoginResponse) => {
         this.ngxService.stop();
         this.dialogRef.close();
         localStorage.setItem('token', response?.token);

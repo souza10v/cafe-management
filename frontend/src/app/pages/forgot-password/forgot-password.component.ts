@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ForgotPasswordResponse } from '../../../models/user.model';
+import { UserModels } from '../../../models/user.model';
 
 
 @Component({
@@ -55,7 +55,7 @@ export class ForgotPasswordComponent {
     };
   
     this.userService.forgotPassword(data).subscribe({
-      next: (response: ForgotPasswordResponse) => {
+      next: (response: UserModels.ForgotPasswordResponse) => {
         this.ngxService.stop();
         this.responseMessage = response.message;
         this.dialogRef.close();

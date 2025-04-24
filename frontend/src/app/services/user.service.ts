@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserModels } from '../../models';
+import { UserModels } from '../../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,7 @@ export class UserService {
     return this.httpClient.get(this.url + '/user/checkToken');
   }
 
-  changePassword(data: any){
+  changePassword(data: UserModels.ChangePasswordRequest){
     return this.httpClient.post<UserModels.ChangePasswordResponse>(this.url + '/user/changePassword', data, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     })
