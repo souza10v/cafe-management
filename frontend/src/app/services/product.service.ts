@@ -33,8 +33,8 @@ export class ProductService {
     });
   }
 
-  updateStatus(data: ProductModels.UpdateProductRequest) {
-    return this.httpClient.patch<ProductModels.UpdateProductResponse>(this.url + '/product/updateStatus', data, {
+  updateStatus(data: ProductModels.UpdateStatusRequest) {
+    return this.httpClient.patch<ProductModels.UpdateStatusResponse>(this.url + '/product/updateStatus', data, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     }
     )
