@@ -46,4 +46,16 @@ export class ProductService {
     }
     )
   }
+
+  getProductsByCategory(id: any) {
+    return this.httpClient.get<ProductModels.GetCategoryByIdResponse>(this.url + '/product/getCategory/' + id, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    })
+  }
+
+  getProductById(id: any) {
+    return this.httpClient.get<ProductModels.GetProductByIdResponse>(this.url + '/product/get/' + id, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    })
+  }
 }

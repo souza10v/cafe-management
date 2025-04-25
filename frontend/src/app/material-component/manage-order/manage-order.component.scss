@@ -1,0 +1,41 @@
+mat-form-field {
+    padding: 5px;
+}
+
+.float-right {
+    float: right;
+}
+
+mat-card {
+    padding: 20px;
+}
+
+table {
+    margin-top: 5px;
+    width: 100%;
+}
+
+.div-button {
+    width: 15%;
+    margin: 15px 0 15px 0;
+    display: flex;
+}
+
+.div-two-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.div-two-buttons .button,
+.div-two-buttons .button-secondary {
+    flex: 0 0 220px;
+}
+
+
+.center-table th,
+.center-table td {
+    text-align: center;
+    vertical-align: middle;
+}

@@ -40,6 +40,7 @@ export namespace ProductModels {
     export interface GetProductByIdResponse {
       data: Product;
     }
+
   
     export interface UpdateStatusRequest {
       productID: string;
