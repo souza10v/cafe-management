@@ -238,7 +238,22 @@ export class ManageOrderComponent {
     };
 
     this.billService.getPDF(data).subscribe((resp: any) => {
-      saveAs(resp, fileName + '.pdf');
+      //saveAs(resp, fileName + '.pdf'); Pergunta onde salvar
+
+      const fileURL = URL.createObjectURL(resp); // Abre nova guia
+      window.open(fileURL);
+
+      // this.billService.getPDF(data).subscribe((resp: Blob) => {
+      //   const blob = new Blob([resp], { type: 'application/pdf' });
+      //   const url = window.URL.createObjectURL(blob);
+      //   const a = document.createElement('a');
+      //   a.href = url;
+      //   a.download = `${fileName}.pdf`;
+      //   a.click();
+      //   window.URL.revokeObjectURL(url);
+      //   this.ngxService.stop();
+      // });
+      
       this.ngxService.stop();
     });
   }
