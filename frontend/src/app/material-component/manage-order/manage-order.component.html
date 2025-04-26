@@ -2,12 +2,6 @@
     
     <h1 class="mat-h1">Manage Orders</h1>
     <hr />
-    <div class="div-button">
-        <button mat-flat-button color="primary" class="button" [disabled]="validateSubmit()" (click)="submitAction()">
-            Submit & Get Bill
-        </button>
-    </div>
-
     <mat-card>
         <b><span>Customer Details:</span></b>
 
@@ -60,7 +54,7 @@
                         <mat-select matInput formControlName="paymentMethod" required>
                             <mat-option value="Cash">Cash</mat-option>
                             <mat-option value="Card">Card</mat-option>
-                            <mat-option value="Mpesa">Mpesa</mat-option>
+                            <mat-option value="Pix">Pix</mat-option>
                         </mat-select>
                         <mat-error *ngIf="
                 manageOrderForm.controls.paymentMethod.touched &&
@@ -117,13 +111,20 @@
                     </mat-form-field>
 
                     <mat-form-field appearance="fill" fxFlex>
-                        <mat-label>Price</mat-label>
-                        <input type="text" matInput formControlName="price" required readonly />
-                    </mat-form-field>
+                        <mat-label>Preço</mat-label>
+                        <input 
+                          type="text" 
+                          matInput 
+                          [value]="manageOrderForm.get('price')?.value | currency:'BRL':'symbol':'1.2-2'" 
+                          required 
+                          readonly 
+                        />
+                      </mat-form-field>
+                      
 
                     <mat-form-field appearance="fill" fxFlex>
                         <mat-label>Quantity</mat-label>
-                        <input type="number" matInput formControlName="quantity" (keyup)="setQuantity($event)" #input />
+                        <input type="number" matInput formControlName="quantity" (keyup)="setQuantity($event)" (change)="setQuantity($event)" #input />
                         <mat-error *ngIf="
                 manageOrderForm.controls.quantity.touched &&
                 manageOrderForm.controls.quantity.invalid
@@ -135,7 +136,7 @@
 
                     <mat-form-field appearance="fill" fxFlex>
                         <mat-label>Total</mat-label>
-                        <input type="text" matInput formControlName="total" required readonly />
+                        <input type="text" matInput [value]="manageOrderForm.get('total')?.value | currency:'BRL':'symbol':'1.2-2'"  required readonly />
                     </mat-form-field>
                 </div>
             </div>
@@ -147,7 +148,7 @@
             </button>
 
             <button mat-flat-button color="primary" class="button-secondary ">
-                Total Amount: {{ totalAmount }}
+                Total Amount: {{ totalAmount | currency:'BRL':'symbol':'1.2-2' }}
             </button>
         </div>
     </mat-card>
@@ -166,7 +167,7 @@
 
             <ng-container matColumnDef="price">
                 <th mat-header-cell *matHeaderCellDef>Price</th>
-                <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+                <td mat-cell *matCellDef="let element">{{ element.price | currency:'BRL':'symbol':'1.2-2' }}</td>
             </ng-container>
 
             <ng-container matColumnDef="quantity">
@@ -176,7 +177,7 @@
 
             <ng-container matColumnDef="total">
                 <th mat-header-cell *matHeaderCellDef>Total</th>
-                <td mat-cell *matCellDef="let element">{{ element.total }}</td>
+                <td mat-cell *matCellDef="let element">{{ element.total | currency:'BRL':'symbol':'1.2-2' }}</td>
             </ng-container>
 
             <ng-container matColumnDef="edit">
@@ -191,4 +192,10 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
     </div>
+    <div class="div-button">
+        <button mat-flat-button color="primary" class="button" (click)="submitAction()">
+            Submit & Get Bill
+        </button>
+    </div>
+
 </div>

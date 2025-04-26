@@ -54,7 +54,7 @@ export class ProductService {
   }
 
   getProductById(id: any) {
-    return this.httpClient.get<ProductModels.GetProductByIdResponse>(this.url + '/product/get/' + id, {
+    return this.httpClient.get<ProductModels.GetProductByIdResponse>(this.url + '/product/getProduct/' + id, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     })
   }

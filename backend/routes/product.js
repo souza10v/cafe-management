@@ -81,7 +81,7 @@ router.get('/getCategory/:id', auth.authenticateToken, async (req, res) => {
         const products = await prismaClient.product.findMany({
             where: {
                 categoryID: parseInt(id),
-                status: "ativo"
+                status: "true"
             },
             select: {
                 id: true,
