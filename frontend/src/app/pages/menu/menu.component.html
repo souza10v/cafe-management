@@ -7,7 +7,7 @@
     <mat-nav-list appAccordion>
       <mat-list-item appAccordionLink *ngFor="let menuItem of menuItems.getMenuItems()" routerLinkActive="selected">
         <a class="menu-link" appAccordionToggle [routerLink]="getRouterLink(menuItem.state)" 
-          *ngIf="menuItem.role === '' || menuItem.role === tokenPayload.role"> <!-- Logic to show menu items --> 
+          *ngIf="menuItem.role === '' || menuItem.role === tokenPayload.role"> <!-- Exibir itens do menu --> 
           <mat-icon>{{ menuItem.icon }}</mat-icon>
           <span>{{ menuItem.name }}</span>
           <span fxFlex></span>
