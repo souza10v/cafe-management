@@ -67,7 +67,7 @@ export class ViewBillComponent {
     dialogConfig.data = {
       data: values
     };
-    dialogConfig.width = "100%";
+
     const dialogRef = this.dialog.open(ViewBillProductsComponent, dialogConfig);
     this.router.events.subscribe(() => {
       dialogRef.close();

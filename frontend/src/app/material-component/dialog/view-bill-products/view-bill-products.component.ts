@@ -20,8 +20,9 @@ export class ViewBillProductsComponent implements OnInit {
     'category',
     'price',
     'quantity',
-    'total',
+    'total'
   ];
+  
   dataSource: any = [];
   data: any;
 
@@ -35,7 +36,8 @@ export class ViewBillProductsComponent implements OnInit {
     this.data = this.dialogData?.data || {};
     console.log('DATA:', this.data);
     console.log('productDetails:', this.data.productDetails);
-    this.dataSource = Array.isArray(this.data.productDetails) ? this.data.productDetails : [];
+    this.dataSource = JSON.parse(this.data.productDetails);
+    console.log(this.dataSource);
 
     this.cdr.detectChanges();
   }
