@@ -174,12 +174,14 @@ router.patch('/update', auth.authenticateToken, checkRole.checkRole, async (req,
             return res.status(400).json({ message: "ID e status são obrigatórios." });
         }
 
+        const parsedStatus = status === 'true' || status === true;
+
         const updatedUser = await prismaClient.user.update({
             where: { id: Number(id) },
-            data: { status: Boolean(status) },
+            data: { status: parsedStatus },
         });
 
-        return res.status(200).json({ message: "Usuário atualizado com sucesso.", status: updatedUser.data });
+        return res.status(200).json({ message: "Usuário atualizado com sucesso." });
     } catch (error) {
         console.error("Erro ao atualizar usuário:", error);
         return res.status(500).json({ message: "Erro interno do servidor.", error });

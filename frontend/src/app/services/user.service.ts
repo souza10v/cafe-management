@@ -33,8 +33,18 @@ export class UserService {
     return this.httpClient.get(this.url + '/user/checkToken');
   }
 
-  changePassword(data: UserModels.ChangePasswordRequest){
+  changePassword(data: UserModels.ChangePasswordRequest) {
     return this.httpClient.post<UserModels.ChangePasswordResponse>(this.url + '/user/changePassword', data, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    })
+  }
+
+  getUsers() {
+    return this.httpClient.get(this.url + "/user/get")
+  }
+
+  update(data: any) {
+    return this.httpClient.patch(this.url + "/user/update", data, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     })
   }
